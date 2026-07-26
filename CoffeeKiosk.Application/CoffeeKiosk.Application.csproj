@@ -11,6 +11,15 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Repository\" />
+    <Folder Include="Interfaces\Security\" />
+    <Folder Include="Interfaces\Service\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Service\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
