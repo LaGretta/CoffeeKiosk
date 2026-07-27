@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Security\" />
-    <Folder Include="Interfaces\Service\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Service\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
