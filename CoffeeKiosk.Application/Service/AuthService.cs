@@ -51,6 +51,7 @@ public class AuthService : IAuthService
         var user = new User
         {
             Username = dto.Username,
+            Email = dto.Email,
             PasswordHash = _hasher.Hash(dto.Password),
             Role = dto.Role,
             CreatedAt = DateTime.UtcNow

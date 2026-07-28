@@ -17,6 +17,9 @@ public class CreateUserValidator : AbstractValidator<CreateUserDto>
             .MaximumLength(50).WithMessage("Password must be no more than 50 characters long");
         RuleFor(n => n.Role)
             .IsInEnum().WithMessage("Invalid role");
+        RuleFor(n => n.Email)
+            .NotEmpty().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Invalid email format");
     }
 }
 public class LoginUserValidator : AbstractValidator<LoginDto>
