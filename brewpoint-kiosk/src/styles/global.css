@@ -1,0 +1,162 @@
+/* ============================================================
+   Brewpoint Kiosk — global styles & design tokens
+   Values are authoritative from the design handoff (hi-fi).
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bg-cream: #f4ebdd;
+  --surface: #fffdf8;
+  --surface-2: #fbf6ee;
+
+  /* Espresso / dark UI */
+  --espresso: #2b2019;
+  --espresso-soft: #3a2c22;
+
+  /* Accent (terracotta / burnt orange) */
+  --accent: #b85c2c;
+  --accent-hover: #9a4b22;
+
+  /* Text */
+  --muted: #9c8b78;
+  --muted-2: #6b5b4a;
+  --muted-3: #b9a991;
+
+  /* Borders & dividers */
+  --border: #e4d8c6;
+  --border-soft: #efe6d6;
+  --divider: #f0e7d8;
+
+  /* Disabled / chips */
+  --disabled-bg: #ede4d5;
+  --disabled-text: #b0a08d;
+  --chip-bg: #e9ddcb;
+  --chip-circle: #f0e7d8;
+
+  /* Kiosk canvas (portrait tablet) */
+  --stage-w: 1080px;
+  --stage-h: 1920px;
+
+  /* Shadows */
+  --shadow-card: 0 12px 30px rgba(43, 32, 25, 0.06);
+  --shadow-cartbar: 0 24px 50px rgba(43, 32, 25, 0.35);
+  --shadow-sheet: 0 -30px 80px rgba(43, 32, 25, 0.28);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--espresso);
+  background: #241a14; /* letterbox behind the scaled kiosk canvas */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---- Kiosk stage: fixed 1080x1920 canvas, scaled to fit the viewport ---- */
+.stage-viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stage {
+  width: var(--stage-w);
+  height: var(--stage-h);
+  flex: none;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-cream);
+  transform: scale(var(--stage-scale, 1));
+  transform-origin: center center;
+}
+
+/* ---- Scrollbars inside scroll regions ---- */
+.bp-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.bp-scroll::-webkit-scrollbar-thumb {
+  background: #dccdb8;
+  border-radius: 8px;
+}
+.bp-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #dccdb8 transparent;
+}
+
+/* ---- Animations ---- */
+@keyframes bpUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bpPop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bpDots {
+  0%,
+  20% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes bpFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bpSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

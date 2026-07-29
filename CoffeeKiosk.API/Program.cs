@@ -49,6 +49,15 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS: minimal dev policy so the Brewpoint kiosk frontend (Vite dev server)
+// can call this API from the browser. Development origins only.
+const string KioskCorsPolicy = "BrewpointKioskDev";
+builder.Services.AddCors(options =>
+    options.AddPolicy(KioskCorsPolicy, policy => policy
+        .WithOrigins("http://localhost:5173", "http://127.0.0.1:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
+
 var app = builder.Build();
 
 app.UseExceptionHandler();
@@ -71,8 +80,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();   
-app.UseAuthorization();    
+app.UseCors(KioskCorsPolicy);
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -1,0 +1,79 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 44px 56px 28px;
+  flex: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.logoRing {
+  width: 34px;
+  height: 34px;
+  border: 5px solid var(--bg-cream);
+  border-radius: 50%;
+  border-top-color: var(--accent);
+}
+
+.wordmarkWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.wordmark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  line-height: 0.95;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  font-size: 20px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.helper {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 4px;
+  border-radius: 12px;
+}
+
+.helper:active {
+  background: rgba(43, 32, 25, 0.04);
+}
+
+.helperStrong {
+  font-weight: 600;
+  color: var(--espresso);
+}
+
+.helperMuted {
+  color: var(--muted);
+}

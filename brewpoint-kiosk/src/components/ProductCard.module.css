@@ -1,0 +1,115 @@
+.card {
+  background: var(--surface);
+  border-radius: 32px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-soft);
+}
+
+.soldOut {
+  opacity: 0.6;
+}
+
+.image {
+  height: 250px;
+  border-radius: 26px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disc {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 20px 40px rgba(43, 32, 25, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discInner {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.soldBadge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: var(--espresso);
+  color: var(--bg-cream);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.body {
+  padding: 26px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.name {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.desc {
+  font-size: 22px;
+  color: var(--muted);
+  line-height: 1.35;
+  margin-top: 6px;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.add,
+.addDisabled {
+  height: 68px;
+  border-radius: 20px;
+  font-size: 26px;
+  font-weight: 600;
+  border: none;
+}
+
+.add {
+  background: var(--accent);
+  color: #fff;
+  padding: 0 34px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.add:active {
+  background: var(--accent-hover);
+}
+
+.addDisabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
+  padding: 0 30px;
+  font-size: 24px;
+  cursor: not-allowed;
+}

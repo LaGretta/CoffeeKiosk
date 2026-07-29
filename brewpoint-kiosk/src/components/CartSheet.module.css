@@ -1,0 +1,251 @@
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 32, 25, 0.5);
+  z-index: 30;
+  animation: bpFade 0.2s ease;
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 180px;
+  z-index: 31;
+  background: var(--surface);
+  border-radius: 40px 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  animation: bpUp 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow-sheet);
+}
+
+.header {
+  padding: 34px 56px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+}
+
+.title {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.close {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: var(--divider);
+  color: var(--espresso);
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 56px;
+}
+
+/* ---- Empty state ---- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.emptyCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.emptyTitle {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.emptySub {
+  font-size: 24px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.browseButton {
+  margin-top: 34px;
+  background: var(--espresso);
+  color: var(--bg-cream);
+  border: none;
+  height: 78px;
+  padding: 0 46px;
+  border-radius: 22px;
+  font-size: 26px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---- Line item ---- */
+.line {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 2px solid var(--divider);
+}
+
+.thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbDisc {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
+.lineMeta {
+  flex: 1;
+}
+
+.lineName {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.lineSub {
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stepBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: #fff;
+  font-size: 32px;
+  color: var(--espresso);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.stepBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.qty {
+  font-size: 30px;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: center;
+}
+
+.lineTotal {
+  min-width: 130px;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ---- Footer ---- */
+.footer {
+  flex: none;
+  padding: 30px 56px 44px;
+  border-top: 2px solid var(--divider);
+  background: var(--surface);
+}
+
+.error {
+  background: #f7e6de;
+  color: #9a4b22;
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.totalLabel {
+  font-size: 28px;
+  color: var(--muted);
+}
+
+.totalValue {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.payButton {
+  width: 100%;
+  height: 104px;
+  border: none;
+  border-radius: 26px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.payButton:active {
+  background: var(--accent-hover);
+}
+
+.payButton:disabled {
+  cursor: default;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: bpSpin 0.8s linear infinite;
+}

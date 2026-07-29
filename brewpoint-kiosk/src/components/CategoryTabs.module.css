@@ -1,0 +1,52 @@
+.tabs {
+  display: flex;
+  gap: 18px;
+  padding: 8px 56px 26px;
+  flex: none;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 96px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tabOn {
+  border: none;
+  background: var(--espresso);
+  color: var(--bg-cream);
+}
+
+.tabOff {
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--muted-2);
+}
+
+.name {
+  font-size: 34px;
+}
+
+.count {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.countOn {
+  background: var(--accent);
+  color: #fff;
+}
+
+.countOff {
+  background: var(--chip-bg);
+  color: var(--muted);
+}

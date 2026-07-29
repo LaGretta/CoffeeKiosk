@@ -1,0 +1,82 @@
+.bar {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  height: 120px;
+  background: var(--espresso);
+  border-radius: 30px;
+  padding: 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-cartbar);
+  z-index: 10;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--espresso-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.countLabel {
+  font-size: 22px;
+  color: var(--muted-3);
+}
+
+.total {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--bg-cream);
+}
+
+.viewButton {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0 44px;
+  height: 80px;
+  border-radius: 22px;
+  font-size: 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.viewButton:active {
+  background: var(--accent-hover);
+}

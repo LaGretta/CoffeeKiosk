@@ -16,34 +16,76 @@ public class OrderService : IOrderService
     private readonly IAuthRepository _authRepository;
     private readonly IMapper _mapper;
     private readonly ILogger<OrderService> _logger;
+    private readonly IProductRepository _productRepository;
+    private readonly ISizeRepository _sizeRepository;
 
     public OrderService(IOrderRepository iorderrepo
         , IUnitOfWork iunitOfWork
         , IAuthRepository authRepository
-        , IMapper mapper, ILogger<OrderService> logger)
+        , IMapper mapper, ILogger<OrderService> logger,
+        IProductRepository productRepository
+        , ISizeRepository sizeRepository)
     {
         _iorderrepo = iorderrepo;
         _iunitOfWork = iunitOfWork;
         _authRepository = authRepository;
         _mapper = mapper;
         _logger = logger;
+        _productRepository = productRepository;
+        _sizeRepository = sizeRepository;
     }
 
     public async Task<OrderResponseDto> CreateAsync(int kioskUserId, CreateOrderDto dto, CancellationToken ct)
     {
-        var findorder = await _iorderrepo.GetByIdAsync(kioskUserId, ct);
-        if (findorder == null)
-            throw new KeyNotFoundException("Order not found");
-        if(findorder.Status != OrderStatus.Paid)
-            throw new UnauthorizedAccessException("Invalid order status");
-        var order = _mapper.Map<Order>(dto);
-        await  _iorderrepo.AddAsync(order, ct);
+        if (dto.Items == null || dto.Items.Count == 0)
+            throw new InvalidOperationException("Order must contain at least one item");
+
+        var order = new Order
+        {
+            Status = OrderStatus.Placed,
+            CreatedAt = DateTime.UtcNow,
+            CreatedByUserId = kioskUserId,
+            Items = new List<OrderItem>()
+        };
+
+        decimal total = 0;
+
+        foreach (var itemDto in dto.Items)
+        {
+            var product = await _productRepository.GetProductAsync(itemDto.ProductId, ct);
+            if (product == null)
+                throw new KeyNotFoundException($"Product {itemDto.ProductId} not found");
+            if (!product.IsAvailable)
+                throw new InvalidOperationException("Product is not available");
+
+            var size = await _sizeRepository.GetByIdAsync(itemDto.SizeId, ct);
+            if (size == null)
+                throw new KeyNotFoundException($"Size {itemDto.SizeId} not found");
+
+            if (itemDto.Quantity <= 0)
+                throw new InvalidOperationException("Quantity must be greater than zero");
+
+            var unitPrice = product.BasePrice + size.PriceModifier;
+
+            order.Items.Add(new OrderItem
+            {
+                ProductId = product.Id,
+                SizeId = size.Id,
+                Quantity = itemDto.Quantity,
+                UnitPrice = unitPrice
+            });
+
+            total += unitPrice * itemDto.Quantity;
+        }
+
+        order.TotalPrice = total;
+
+        var todayCount = await _iorderrepo.GetTodayOrderCountAsync(ct);
+        order.OrderNumber = (todayCount + 1).ToString();
+
+        await _iorderrepo.AddAsync(order, ct);
         await _iunitOfWork.SaveChangesAsync(ct);
-        
-        
-        _logger.LogInformation("Order {OrderNumber} created with {ItemCount} items, total {Total}",
-            order.OrderNumber, order.Items.Count, order.TotalPrice);
-        
+
         return _mapper.Map<OrderResponseDto>(order);
     }
 
