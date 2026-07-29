@@ -5,6 +5,7 @@ using CoffeeKiosk.Application.Interfaces.Repository;
 using CoffeeKiosk.Application.Interfaces.Service;
 using CoffeeKiosk.Domain.Entities;
 using CoffeeKiosk.Domain.Enums;
+using Microsoft.Extensions.Logging;
 
 namespace CoffeeKiosk.Application.Service;
 
@@ -14,16 +15,18 @@ public class OrderService : IOrderService
     private readonly IUnitOfWork _iunitOfWork;
     private readonly IAuthRepository _authRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<OrderService> _logger;
 
     public OrderService(IOrderRepository iorderrepo
         , IUnitOfWork iunitOfWork
         , IAuthRepository authRepository
-        , IMapper mapper)
+        , IMapper mapper, ILogger<OrderService> logger)
     {
         _iorderrepo = iorderrepo;
         _iunitOfWork = iunitOfWork;
         _authRepository = authRepository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<OrderResponseDto> CreateAsync(int kioskUserId, CreateOrderDto dto, CancellationToken ct)
@@ -36,6 +39,11 @@ public class OrderService : IOrderService
         var order = _mapper.Map<Order>(dto);
         await  _iorderrepo.AddAsync(order, ct);
         await _iunitOfWork.SaveChangesAsync(ct);
+        
+        
+        _logger.LogInformation("Order {OrderNumber} created with {ItemCount} items, total {Total}",
+            order.OrderNumber, order.Items.Count, order.TotalPrice);
+        
         return _mapper.Map<OrderResponseDto>(order);
     }
 
